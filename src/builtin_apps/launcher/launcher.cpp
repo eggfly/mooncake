@@ -171,6 +171,15 @@ namespace MOONCAKE {
                 lv_label_set_text(_data.infoBatLevel, _data.infoUpdateBuffer);
             }
 
+            if (getDatabase()->Get(MC_BATTERY_IS_CHARGING)->addr != nullptr) {
+              /* isCharging */
+              bool isCharging =
+                  getDatabase()->Get(MC_BATTERY_IS_CHARGING)->value<bool>();
+              lv_img_set_src(_data.infoBatIcon,
+                             isCharging ? &ui_img_icon_battery_charging_png
+                                        : &ui_img_icon_battery_png);
+            }
+
             /* Update step counter */
             if (getDatabase()->Get(MC_STEPS)->addr != nullptr) {
                 /* Level */
@@ -402,7 +411,7 @@ namespace MOONCAKE {
 
             /* Battery */
             _data.infoBatIcon = lv_img_create(_data.infoPanel);
-            lv_img_set_src(_data.infoBatIcon, &ui_img_icon_battery_png);
+            lv_img_set_src(_data.infoBatIcon, &ui_img_icon_battery_charging_png);
             lv_obj_set_x(_data.infoBatIcon, lv_pct(28));
             lv_obj_set_y(_data.infoBatIcon, lv_pct(-13));
             lv_obj_set_align(_data.infoBatIcon, LV_ALIGN_CENTER);

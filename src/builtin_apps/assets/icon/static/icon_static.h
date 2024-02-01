@@ -17,6 +17,7 @@ LV_IMG_DECLARE(ui_img_icon_hdpi_default_png);
 
 
 /* Status icon */
+LV_IMG_DECLARE(ui_img_icon_battery_charging_png);
 LV_IMG_DECLARE(ui_img_icon_battery_png);
 LV_IMG_DECLARE(ui_img_icon_ble_off_png);   
 LV_IMG_DECLARE(ui_img_icon_ble_on_png);    
