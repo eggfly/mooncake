@@ -61,6 +61,7 @@ namespace MOONCAKE {
 
 /* Power */
 #define MC_BATTERY_LEVEL        "_BAT_LV"       // uint8_t
+#define MC_BATTERY_VOLTAGE      "_BAT_VOLTAGE"       // float
 #define MC_BATTERY_IS_CHARGING  "_BAT_CHG"      // bool
 
 
