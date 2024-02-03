@@ -167,7 +167,7 @@ namespace MOONCAKE {
             /* Update Battery */
             if (getDatabase()->Get(MC_BATTERY_LEVEL)->addr != nullptr) {
                 /* Level */
-                snprintf(_data.infoUpdateBuffer, sizeof(_data.infoUpdateBuffer), "%.2fV\n%d%%", getDatabase()->Get(MC_BATTERY_VOLTAGE)->value<float>(), getDatabase()->Get(MC_BATTERY_LEVEL)->value<uint8_t>());
+                snprintf(_data.infoUpdateBuffer, sizeof(_data.infoUpdateBuffer), "%.3fV\n%d%%", getDatabase()->Get(MC_BATTERY_VOLTAGE)->value<float>(), getDatabase()->Get(MC_BATTERY_LEVEL)->value<uint8_t>());
                 lv_label_set_text(_data.infoBatLevel, _data.infoUpdateBuffer);
             }
 
@@ -417,9 +417,9 @@ namespace MOONCAKE {
             lv_obj_set_align(_data.infoBatIcon, LV_ALIGN_CENTER);
 
             _data.infoBatLevel = lv_label_create(_data.infoPanel);
-            lv_obj_set_x(_data.infoBatLevel, lv_pct(43));
-            lv_obj_set_y(_data.infoBatLevel, lv_pct(-24));
-            lv_obj_set_align(_data.infoBatLevel, LV_ALIGN_CENTER);
+            lv_obj_set_x(_data.infoBatLevel, lv_pct(44));
+            lv_obj_set_y(_data.infoBatLevel, lv_pct(-55));
+            lv_obj_set_align(_data.infoBatLevel, LV_ALIGN_BOTTOM_MID);
             lv_label_set_text(_data.infoBatLevel, "96%");
             lv_obj_set_style_text_color(_data.infoBatLevel, lv_color_hex(0xBEBEBE), LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_text_font(_data.infoBatLevel, &ui_font_OpenSansMediumItalic24, LV_PART_MAIN | LV_STATE_DEFAULT);
