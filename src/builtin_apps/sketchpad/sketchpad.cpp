@@ -11,10 +11,12 @@
 #include "sketchpad.h"
 #include "../assets/assets.h"
 
+#include <esp_log.h>
 
 namespace MOONCAKE {
     namespace BUILTIN_APP {
 
+        static const char* TAG = "Sketchpad";
         
         /* Color picker, copy from demo widget */
         void Sketchpad::color_changer_create(lv_obj_t * parent)
@@ -45,7 +47,7 @@ namespace MOONCAKE {
                 lv_obj_set_style_bg_color(c, lv_palette_main(palette[i]), 0);
                 lv_obj_set_style_radius(c, LV_RADIUS_CIRCLE, 0);
                 lv_obj_set_style_opa(c, LV_OPA_TRANSP, 0);
-                lv_obj_set_size(c, 20, 20);
+                lv_obj_set_size(c, LV_DPX(48), LV_DPX(48));
                 lv_obj_add_event_cb(c, color_event_cb, LV_EVENT_ALL, &palette[i]);
                 lv_obj_clear_flag(c, LV_OBJ_FLAG_SCROLL_ON_FOCUS);
             }
@@ -155,14 +157,15 @@ namespace MOONCAKE {
         void Sketchpad::_update_drawing()
         {
             lv_indev_get_point(lv_indev_get_act(), &_data.touchPoint);
-            // printf("%d %d\n", touchPoint.x, touchPoint.y);
+            // auto touchPoint = _data.touchPoint;
+            // ESP_LOGI(TAG, "touch: %d %d", touchPoint.x, touchPoint.y);
 
             lv_draw_rect_dsc_t rect;
             lv_draw_rect_dsc_init(&rect);
             rect.radius = LV_RADIUS_CIRCLE;
             rect.bg_color = _data.pen_color;
+            // eggfly
             lv_canvas_draw_rect(_data.canvas, _data.touchPoint.x, _data.touchPoint.y, _data.pen_size, _data.pen_size, &rect);
-
         }
 
 
