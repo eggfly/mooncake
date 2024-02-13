@@ -11,3 +11,8 @@
 #include "fonts/fonts.h"
 #include "icon/anim/icon_anim.h"
 #include "icon/static/icon_static.h"
+#include "icon/lottie/lvgl_fingerprint_raw.h"
+#include "icon/lottie/lvgl_material_loader.h"
+#include "icon/lottie/lvgl_loading.h"
+#include "icon/lottie/raw_dragon.h"
+#include "icon/lottie/rainbow_cat.h"

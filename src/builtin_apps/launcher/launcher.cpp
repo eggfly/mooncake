@@ -485,9 +485,30 @@ namespace MOONCAKE {
             }
 
 
+            // lv_obj_t* img = lv_img_create(_data.screenMain);
+            // lv_img_set_src(img, "A:sdcard/boot_anim/background.png");
+            // lv_obj_align(img, LV_ALIGN_CENTER, 0, 0);
+
             /* Create panels */
             _create_info_panel();
             _create_app_panel();
+
+            // lv_obj_t* rlottie_anim_fingerprint_raw = lv_rlottie_create_from_raw(_data.screenMain, 160, 160, FingerprintRaw);
+            // lv_obj_set_x(rlottie_anim_fingerprint_raw, 20);
+            // lv_obj_set_y(rlottie_anim_fingerprint_raw, 20);
+
+            // lv_obj_t* rlottie_anim_loading_raw = lv_rlottie_create_from_raw(_data.screenMain, 160, 160, LoadingRes);
+            // lv_obj_set_x(rlottie_anim_loading_raw, 180);
+            // lv_obj_set_y(rlottie_anim_loading_raw, 20);
+
+            // lv_obj_t* rlottie_anim_material_loading = lv_rlottie_create_from_raw(_data.screenMain, 120, 120, MaterialLoaderRes);
+            // lv_obj_align(rlottie_anim_material_loading, LV_ALIGN_CENTER, 0, 0);
+            // lv_obj_set_x(rlottie_anim_material_loading, 140);
+            // lv_obj_set_y(rlottie_anim_material_loading, 140);
+            // lv_obj_t* rlottie_anim_dragon = lv_rlottie_create_from_raw(_data.screenMain, 120, 120, DragonJsonRes);
+            // lv_obj_align(rlottie_anim_dragon, LV_ALIGN_CENTER, 0, 0);
+            lv_obj_t* rlottie_anim = lv_rlottie_create_from_raw(_data.screenMain, 300, 300, RainbowCatRes);
+            lv_obj_align(rlottie_anim, LV_ALIGN_CENTER, 0, 0);
         }
 
 

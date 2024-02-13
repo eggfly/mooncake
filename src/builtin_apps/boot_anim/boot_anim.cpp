@@ -44,9 +44,9 @@ namespace MOONCAKE {
             lv_obj_align(_data.img_bg_static, LV_ALIGN_CENTER, 0, 0);
 
             /* GIF bg */
-            _data.img_bk_gif = lv_gif_create(_data.screen);
-            lv_gif_set_src(_data.img_bk_gif, _data.img_bg_gif_path);
-            lv_obj_align(_data.img_bk_gif, LV_ALIGN_CENTER, 0, 0);
+            // _data.img_bk_gif = lv_gif_create(_data.screen);
+            // lv_gif_set_src(_data.img_bk_gif, _data.img_bg_gif_path);
+            // lv_obj_align(_data.img_bk_gif, LV_ALIGN_CENTER, 0, 0);
             
 
         }

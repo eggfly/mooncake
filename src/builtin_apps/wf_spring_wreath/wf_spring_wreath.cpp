@@ -178,6 +178,16 @@ namespace MOONCAKE {
             lv_label_set_text(_data.label_infos, "~~~~~~~~~~~~~~~~\n3/7 Mon.  2333 steps");
             lv_obj_set_style_text_color(_data.label_infos, lv_color_hex(0xEFF2A5), LV_PART_MAIN);
             lv_obj_set_style_text_font(_data.label_infos, &ui_font_OpenSansMediumItalic24, LV_PART_MAIN);
+
+            // lv_scr_act();
+            // lv_obj_t *rlottie_anim_loader_from_raw = lv_rlottie_create_from_raw(_data.screen, 60, 60, MaterialLoaderRes);
+            // lv_obj_set_x(rlottie_anim_loader_from_raw, 100);
+            // lv_obj_set_y(rlottie_anim_loader_from_raw, 100);
+
+            // lv_obj_t* rlottie_anim_fingerprint_raw = lv_rlottie_create_from_raw(_data.screen, 30, 30, LoadingRes);
+            // lv_obj_set_x(rlottie_anim_fingerprint_raw, 80);
+            // lv_obj_set_y(rlottie_anim_fingerprint_raw, 80);
+            
         }
 
 

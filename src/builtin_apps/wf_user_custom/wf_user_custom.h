@@ -80,7 +80,7 @@ namespace MOONCAKE {
 
                 std::string wf_current_using_path = "null";
                 std::string wf_name;
-                bool using_gif_bg = false;
+                bool using_gif_bg = true;
 
                 Pos_t pos_clock_hour_a;
                 Pos_t pos_clock_hour_b;
