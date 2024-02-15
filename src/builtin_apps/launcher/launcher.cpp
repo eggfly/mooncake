@@ -11,6 +11,7 @@
 #include "launcher.h"
 #include "../../system_data_def.h"
 #include "../assets/assets.h"
+#include <bmp280.h>
 
 
 #define SCROLL_VER          0
@@ -183,7 +184,10 @@ namespace MOONCAKE {
             /* Update step counter */
             if (getDatabase()->Get(MC_STEPS)->addr != nullptr) {
                 /* Level */
-                snprintf(_data.infoUpdateBuffer, sizeof(_data.infoUpdateBuffer), "%ld steps!", getDatabase()->Get(MC_STEPS)->value<uint32_t>());
+                uint32_t steps = getDatabase()->Get(MC_STEPS)->value<uint32_t>();
+                float temperature = getDatabase()->Get(MC_Temperature)->value<float>();
+                float pressure = getDatabase()->Get(MC_Pressure)->value<float>() / 1000;
+                snprintf(_data.infoUpdateBuffer, sizeof(_data.infoUpdateBuffer), " %ld steps\n%.2f C\n%.2f kPa", steps, temperature, pressure);
                 lv_label_set_text(_data.infoStepCounter, _data.infoUpdateBuffer);
             }
         }
@@ -366,6 +370,9 @@ namespace MOONCAKE {
             lv_obj_set_scrollbar_mode(_data.infoPanel, LV_SCROLLBAR_MODE_OFF);
             lv_obj_set_scroll_dir(_data.infoPanel, LV_DIR_NONE);
 
+            // lv_obj_t* gif_spaceman = lv_gif_create(_data.infoPanel);
+            // lv_gif_set_src(gif_spaceman, "A:sdcard/space_160.gif");
+            // lv_obj_align(gif_spaceman, LV_ALIGN_CENTER, lv_pct(3), lv_pct(2));
 
             /* Walking man anim */
             #if PLAY_WALKING_ANIM
@@ -507,8 +514,8 @@ namespace MOONCAKE {
             // lv_obj_set_y(rlottie_anim_material_loading, 140);
             // lv_obj_t* rlottie_anim_dragon = lv_rlottie_create_from_raw(_data.screenMain, 120, 120, DragonJsonRes);
             // lv_obj_align(rlottie_anim_dragon, LV_ALIGN_CENTER, 0, 0);
-            lv_obj_t* rlottie_anim = lv_rlottie_create_from_raw(_data.screenMain, 300, 300, RainbowCatRes);
-            lv_obj_align(rlottie_anim, LV_ALIGN_CENTER, 0, 0);
+            // lv_obj_t* rlottie_anim = lv_rlottie_create_from_raw(_data.screenMain, 300, 300, RainbowCatRes);
+            // lv_obj_align(rlottie_anim, LV_ALIGN_CENTER, 0, 0);
         }
 
 

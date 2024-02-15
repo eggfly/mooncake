@@ -25,6 +25,7 @@ namespace MOONCAKE {
                 lv_obj_t* screen = nullptr;
                 lv_obj_t* roller_hour = nullptr;
                 lv_obj_t* roller_min = nullptr;
+                lv_obj_t* roller_year = nullptr;
                 lv_obj_t* roller_month = nullptr;
                 lv_obj_t* roller_mday = nullptr;
                 lv_obj_t* button_set = nullptr;

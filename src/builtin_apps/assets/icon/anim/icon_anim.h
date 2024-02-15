@@ -140,5 +140,5 @@ static const lv_img_dsc_t * anim_spring_wreath[] = {
     // &ui_img_anim_spring_wreath_26_png,
 };
 // eggfly
-#define NUM_ANIM_SPRING_WREATH 2
+#define NUM_ANIM_SPRING_WREATH 27
 

@@ -69,7 +69,7 @@ namespace MOONCAKE {
             time_buffer.mday = lv_roller_get_selected(_data.roller_mday) + 1;
 
             /* Get Year(o.O) */
-            time_buffer.year = 2023 - 1900;
+            time_buffer.year = lv_roller_get_selected(_data.roller_year) - 1900;
 
             /* Get Wday(o.O) */
             time_buffer.wday = 6;
@@ -161,8 +161,16 @@ namespace MOONCAKE {
             lv_obj_set_style_text_font(label_banner, &ui_font_OpenSansMedium96, LV_PART_MAIN | LV_STATE_DEFAULT);
 
 
+            lv_obj_t* label_year = lv_label_create(_data.screen);
+            lv_obj_set_x(label_year, -120);
+            lv_obj_set_y(label_year, 32);
+            lv_obj_set_align(label_year, LV_ALIGN_CENTER);
+            lv_label_set_text(label_year, "- Year -");
+            lv_obj_set_style_text_font(label_year, &ui_font_OpenSansMediumItalic24, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+
             lv_obj_t* label_month = lv_label_create(_data.screen);
-            lv_obj_set_x(label_month, -90);
+            lv_obj_set_x(label_month, 0);
             lv_obj_set_y(label_month, 32);
             lv_obj_set_align(label_month, LV_ALIGN_CENTER);
             lv_label_set_text(label_month, "- Month -");
@@ -170,7 +178,7 @@ namespace MOONCAKE {
 
 
             lv_obj_t* label_mday = lv_label_create(_data.screen);
-            lv_obj_set_x(label_mday, 90);
+            lv_obj_set_x(label_mday, 120);
             lv_obj_set_y(label_mday, 32);
             lv_obj_set_align(label_mday, LV_ALIGN_CENTER);
             lv_label_set_text(label_mday, "- Day -");
@@ -216,12 +224,31 @@ namespace MOONCAKE {
             lv_obj_set_style_radius(_data.roller_min, 15, LV_PART_SELECTED | LV_STATE_DEFAULT);
             lv_obj_set_style_bg_color(_data.roller_min, lv_color_hex(0xD45252), LV_PART_SELECTED | LV_STATE_DEFAULT);
 
+            // year start
+            _data.roller_year = lv_roller_create(_data.screen);
+            lv_roller_set_options(_data.roller_year, "2020\n2021\n2022\n2023\n2024\n2025\n2026\n2027\n2028\n2029\n2030", LV_ROLLER_MODE_NORMAL);
+            lv_obj_set_width(_data.roller_year, lv_pct(30));
+            lv_obj_set_height(_data.roller_year, lv_pct(25));
+            lv_obj_set_x(_data.roller_year, -125);
+            lv_obj_set_y(_data.roller_year, 100);
+            lv_obj_set_align(_data.roller_year, LV_ALIGN_CENTER);
+            lv_obj_set_style_text_color(_data.roller_year, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_font(_data.roller_year, &ui_font_OpenSansMediumItalic24, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_radius(_data.roller_year, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_bg_color(_data.roller_year, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_border_width(_data.roller_year, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+            lv_obj_set_style_text_font(_data.roller_year, &ui_font_OpenSansMediumItalic24, LV_PART_SELECTED | LV_STATE_DEFAULT);
+            lv_obj_set_style_radius(_data.roller_year, 15, LV_PART_SELECTED | LV_STATE_DEFAULT);
+            lv_obj_set_style_bg_color(_data.roller_year, lv_color_hex(0xD45252), LV_PART_SELECTED | LV_STATE_DEFAULT);
+            // year end
+
 
             _data.roller_month = lv_roller_create(_data.screen);
             lv_roller_set_options(_data.roller_month, "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12", LV_ROLLER_MODE_NORMAL);
-            lv_obj_set_width(_data.roller_month, lv_pct(45));
+            lv_obj_set_width(_data.roller_month, lv_pct(30));
             lv_obj_set_height(_data.roller_month, lv_pct(25));
-            lv_obj_set_x(_data.roller_month, -95);
+            lv_obj_set_x(_data.roller_month, 0);
             lv_obj_set_y(_data.roller_month, 100);
             lv_obj_set_align(_data.roller_month, LV_ALIGN_CENTER);
             lv_obj_set_style_text_color(_data.roller_month, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -239,10 +266,10 @@ namespace MOONCAKE {
             lv_roller_set_options(_data.roller_mday,
                                 "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31",
                                 LV_ROLLER_MODE_NORMAL);
-            lv_obj_set_width(_data.roller_mday, lv_pct(45));
+            lv_obj_set_width(_data.roller_mday, lv_pct(30));
             lv_obj_set_height(_data.roller_mday, lv_pct(25));
-            lv_obj_set_x(_data.roller_mday, 95);
-            lv_obj_set_y(_data.roller_mday, 103);
+            lv_obj_set_x(_data.roller_mday, 125);
+            lv_obj_set_y(_data.roller_mday, 100);
             lv_obj_set_align(_data.roller_mday, LV_ALIGN_CENTER);
             lv_obj_set_style_text_color(_data.roller_mday, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_text_font(_data.roller_mday, &ui_font_OpenSansMediumItalic24, LV_PART_MAIN | LV_STATE_DEFAULT);

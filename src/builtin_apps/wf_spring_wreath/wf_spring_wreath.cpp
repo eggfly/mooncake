@@ -11,6 +11,7 @@
 #include "wf_spring_wreath.h"
 #include "../assets/assets.h"
 
+#include <esp_log.h>
 
 /* Works like shit on esp32 */
 #define RANDOM_ROTATION 0
@@ -59,9 +60,21 @@ namespace MOONCAKE {
         {
             /* Update anim */
             if (_anim.isPlaying() && ((lv_tick_get() - _anim._update_count) > _anim._update_interval)) {
-                
-                lv_img_set_src(_anim._img, anim_spring_wreath[_anim._index]);
+                _set_anim_index(_anim._index);
+                // lv_img_set_src(_anim._img, anim_spring_wreath[]);
+                // const lv_img_dsc_t *frame = anim_spring_wreath[_anim._index];
+                // lv_fs_file_t f;
+                // lv_fs_res_t res = lv_fs_open(&f, path.c_str(), LV_FS_MODE_WR);
 
+                // if (res == LV_FS_RES_OK) {
+                //     uint32_t bw;
+                //     res = lv_fs_write(&f, frame->data, frame->data_size, &bw);
+                //     lv_fs_close(&f);
+                //     ESP_LOGE("spring", "written to file, %s, length=%lu", path.c_str(), frame->data_size);
+                // }
+
+                // lv_img_set_src(_anim._img, "A:sdcard/boot_anim/background.png");
+                ESP_LOGE("spring", "lv_img_set_src, index=%d", _anim._index);
                 /* Next frame */
                 _anim._index++;
                 if (_anim._index > (NUM_ANIM_SPRING_WREATH - 1)) {
@@ -88,7 +101,9 @@ namespace MOONCAKE {
                 _anim.setIndex(0);
                 _anim.startPlaying();
                 /* Update at once */
-                lv_img_set_src(_anim._img, anim_spring_wreath[0]);
+
+                _set_anim_index(0);
+                // lv_img_set_src(_anim._img, anim_spring_wreath[0]);
             }
 
             /* If pressed key Home */
@@ -101,6 +116,12 @@ namespace MOONCAKE {
             }
         }
 
+        void WF_Spring_Wreath::_set_anim_index(uint16_t index){
+            std::string path = "A:sdcard/spring_wreath/spring_wreath_";
+            path += std::to_string(index);
+            path += ".png";
+            lv_img_set_src(_anim._img, path.c_str());
+        }
 
         void WF_Spring_Wreath::_update_data()
         {

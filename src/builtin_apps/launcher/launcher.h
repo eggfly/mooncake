@@ -52,7 +52,7 @@ namespace MOONCAKE {
             lv_obj_t* infoNoteIcon = nullptr;
 
             uint32_t infoUpdateTickCount = 0;
-            char infoUpdateBuffer[24];
+            char infoUpdateBuffer[64];
         };
 
 

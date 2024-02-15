@@ -64,6 +64,11 @@ namespace MOONCAKE {
 #define MC_BATTERY_VOLTAGE      "_BAT_VOLTAGE"       // float
 #define MC_BATTERY_IS_CHARGING  "_BAT_CHG"      // bool
 
+/* Sensor */
+#define MC_Temperature        "_temperature"    // float
+#define MC_Pressure           "_pressure"       // float
+#define MC_Humidity           "_humidity"       // float
+
 
 /* Wireless */
 #define MC_WIFI_IS_CONNECTED    "_WIFI_CN"      // bool

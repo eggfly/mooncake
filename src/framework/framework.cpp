@@ -11,7 +11,7 @@
 #include "framework.h"
 #include "../builtin_apps/builtin_apps.h"
 #include "../system_data_def.h"
-
+#include <esp_log.h>
 
 namespace MOONCAKE {
 
@@ -92,9 +92,14 @@ namespace MOONCAKE {
         /* Steps */
         _config.database->Add<uint32_t>(MC_STEPS, uint32_t(2333));
 
+        /* Sensors */
+        _config.database->Add<float>(MC_Temperature, float(30));
+        _config.database->Add<float>(MC_Pressure, float(0));
+        _config.database->Add<float>(MC_Humidity, float(0));
+
         /* Flag of just wake up from sleep */
         _config.database->Add<bool>(MC_JUST_WAKEUP, bool(false));
-
+        ESP_LOGI("framework", "database key value initialized.");
         #endif
     }
 

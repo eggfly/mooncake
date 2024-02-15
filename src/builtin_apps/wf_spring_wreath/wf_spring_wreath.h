@@ -63,6 +63,7 @@ namespace MOONCAKE {
                 static void _lvgl_event_cb(lv_event_t* e);
                 void _update_anim();
                 void _update_data();
+                void _set_anim_index(uint16_t index);
 
 
             public:

@@ -29,7 +29,7 @@ set(MOONCAKE_BUILTIN_APPS_INC_DIRS
 
 # Public component requirement
 set(MOONCAKE_REQUIRES
-    lvgl ArduinoJson
+    lvgl ArduinoJson bmp280
 )
 
 # Private component requirement
