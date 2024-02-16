@@ -11,6 +11,7 @@
 #include "launcher.h"
 #include "../../system_data_def.h"
 #include "../assets/assets.h"
+#include <math.h>
 #include <bmp280.h>
 
 
@@ -152,6 +153,14 @@ namespace MOONCAKE {
             #endif
         }
 
+        float Launcher::calcAltitude(float seaLevelhPa, float pressure) {
+            float altitude;
+            // float pressure is in Si units for Pascal
+            // convert to hPa
+            pressure /= 100;
+            altitude = 44330 * (1.0 - pow(pressure / seaLevelhPa, 0.1903));
+            return altitude;
+        }
 
         void Launcher::updateInfos()
         {
@@ -186,8 +195,11 @@ namespace MOONCAKE {
                 /* Level */
                 uint32_t steps = getDatabase()->Get(MC_STEPS)->value<uint32_t>();
                 float temperature = getDatabase()->Get(MC_Temperature)->value<float>();
-                float pressure = getDatabase()->Get(MC_Pressure)->value<float>() / 1000;
-                snprintf(_data.infoUpdateBuffer, sizeof(_data.infoUpdateBuffer), " %ld steps\n%.2f C\n%.2f kPa", steps, temperature, pressure);
+                float pressure = getDatabase()->Get(MC_Pressure)->value<float>();
+                float pressureHpa = pressure / 100;
+                // Approx altitude
+                float altitude = calcAltitude(1023.00, pressure);
+                snprintf(_data.infoUpdateBuffer, sizeof(_data.infoUpdateBuffer), "%ld steps\n%.2f C\n%.1f m\n%.2f hPa", steps, temperature, altitude, pressureHpa);
                 lv_label_set_text(_data.infoStepCounter, _data.infoUpdateBuffer);
             }
         }
@@ -405,28 +417,28 @@ namespace MOONCAKE {
             lv_obj_set_style_text_color(_data.infoClockMin, lv_color_hex(0xBEBEBE), LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_text_font(_data.infoClockMin, &ui_font_OpenSansMedium96, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-
             /* Step number */
             _data.infoStepCounter = lv_label_create(_data.infoPanel);
-            lv_obj_set_x(_data.infoStepCounter, lv_pct(33));
-            lv_obj_set_y(_data.infoStepCounter, lv_pct(35));
-            lv_obj_set_align(_data.infoStepCounter, LV_ALIGN_CENTER);
+            // lv_obj_set_x(_data.infoStepCounter, lv_pct(7));
+            // lv_obj_set_y(_data.infoStepCounter, lv_pct(28));
+            lv_obj_set_align(_data.infoStepCounter, LV_ALIGN_BOTTOM_RIGHT);
+            // lv_obj_set_style_pad_top(_data.infoPressure, lv_pct(40), 0);
+            lv_obj_set_style_text_align(_data.infoStepCounter, LV_TEXT_ALIGN_RIGHT, 0);
             lv_label_set_text(_data.infoStepCounter, "2366 steps!");
             lv_obj_set_style_text_color(_data.infoStepCounter, lv_color_hex(0xBEBEBE), LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_text_font(_data.infoStepCounter, &ui_font_OpenSansMediumItalic24, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-
             /* Battery */
             _data.infoBatIcon = lv_img_create(_data.infoPanel);
             lv_img_set_src(_data.infoBatIcon, &ui_img_icon_battery_charging_png);
-            lv_obj_set_x(_data.infoBatIcon, lv_pct(28));
-            lv_obj_set_y(_data.infoBatIcon, lv_pct(-13));
-            lv_obj_set_align(_data.infoBatIcon, LV_ALIGN_CENTER);
+            lv_obj_set_x(_data.infoBatIcon, lv_pct(0));
+            lv_obj_set_y(_data.infoBatIcon, lv_pct(12));
+            lv_obj_set_align(_data.infoBatIcon, LV_ALIGN_TOP_RIGHT);
 
             _data.infoBatLevel = lv_label_create(_data.infoPanel);
-            lv_obj_set_x(_data.infoBatLevel, lv_pct(44));
-            lv_obj_set_y(_data.infoBatLevel, lv_pct(-55));
-            lv_obj_set_align(_data.infoBatLevel, LV_ALIGN_BOTTOM_MID);
+            lv_obj_set_x(_data.infoBatLevel, lv_pct(-9));
+            lv_obj_set_y(_data.infoBatLevel, lv_pct(3));
+            lv_obj_set_align(_data.infoBatLevel, LV_ALIGN_TOP_RIGHT);
             lv_label_set_text(_data.infoBatLevel, "96%");
             lv_obj_set_style_text_color(_data.infoBatLevel, lv_color_hex(0xBEBEBE), LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_text_font(_data.infoBatLevel, &ui_font_OpenSansMediumItalic24, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -435,25 +447,25 @@ namespace MOONCAKE {
             /* Wifi */
             _data.infoWifiIcon = lv_img_create(_data.infoPanel);
             lv_img_set_src(_data.infoWifiIcon, &ui_img_icon_wifi_off_png);
-            lv_obj_set_x(_data.infoWifiIcon, lv_pct(28));
-            lv_obj_set_y(_data.infoWifiIcon, lv_pct(5));
-            lv_obj_set_align(_data.infoWifiIcon, LV_ALIGN_CENTER);
+            lv_obj_set_x(_data.infoWifiIcon, lv_pct(-20));
+            lv_obj_set_y(_data.infoWifiIcon, lv_pct(30));
+            lv_obj_set_align(_data.infoWifiIcon, LV_ALIGN_TOP_RIGHT);
 
 
             /* BLE */
             _data.infoBleIcon = lv_img_create(_data.infoPanel);
             lv_img_set_src(_data.infoBleIcon, &ui_img_icon_ble_off_png);
-            lv_obj_set_x(_data.infoBleIcon, lv_pct(38));
-            lv_obj_set_y(_data.infoBleIcon, lv_pct(5));
-            lv_obj_set_align(_data.infoBleIcon, LV_ALIGN_CENTER);
+            lv_obj_set_x(_data.infoBleIcon, lv_pct(-10));
+            lv_obj_set_y(_data.infoBleIcon, lv_pct(30));
+            lv_obj_set_align(_data.infoBleIcon, LV_ALIGN_TOP_RIGHT);
 
 
             /* Notification */
             _data.infoNoteIcon = lv_img_create(_data.infoPanel);
             lv_img_set_src(_data.infoNoteIcon, &ui_img_icon_note_on_png);
-            lv_obj_set_x(_data.infoNoteIcon, lv_pct(48));
-            lv_obj_set_y(_data.infoNoteIcon, lv_pct(5));
-            lv_obj_set_align(_data.infoNoteIcon, LV_ALIGN_CENTER);
+            lv_obj_set_x(_data.infoNoteIcon, lv_pct(0));
+            lv_obj_set_y(_data.infoNoteIcon, lv_pct(30));
+            lv_obj_set_align(_data.infoNoteIcon, LV_ALIGN_TOP_RIGHT);
         }
 
 

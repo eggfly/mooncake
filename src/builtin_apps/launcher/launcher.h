@@ -92,7 +92,7 @@ namespace MOONCAKE {
 
                 void updateAppIconZoom();
                 void updateInfos();
-
+                float calcAltitude(float seaLevelhPa, float pressure);
 
                 /**
                  * @brief Lifecycle callbacks for derived to override
