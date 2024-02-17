@@ -103,7 +103,6 @@ namespace MOONCAKE {
                 /* Update at once */
 
                 _set_anim_index(0);
-                // lv_img_set_src(_anim._img, anim_spring_wreath[0]);
             }
 
             /* If pressed key Home */
@@ -117,10 +116,15 @@ namespace MOONCAKE {
         }
 
         void WF_Spring_Wreath::_set_anim_index(uint16_t index){
-            std::string path = "A:sdcard/spring_wreath/spring_wreath_";
-            path += std::to_string(index);
-            path += ".png";
-            lv_img_set_src(_anim._img, path.c_str());
+            if (0) {
+                std::string path = "A:sdcard/spring_wreath/";
+                // std::string path = "A:spiffs_0/spring_wreath_";
+                path += std::to_string(index);
+                path += ".png";
+                lv_img_set_src(_anim._img, path.c_str());
+            } else {
+                lv_img_set_src(_anim._img, &anim_spring_wreath_raw[index]);
+            }
         }
 
         void WF_Spring_Wreath::_update_data()

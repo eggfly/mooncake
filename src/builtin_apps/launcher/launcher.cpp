@@ -504,10 +504,6 @@ namespace MOONCAKE {
             }
 
 
-            // lv_obj_t* img = lv_img_create(_data.screenMain);
-            // lv_img_set_src(img, "A:sdcard/boot_anim/background.png");
-            // lv_obj_align(img, LV_ALIGN_CENTER, 0, 0);
-
             /* Create panels */
             _create_info_panel();
             _create_app_panel();
@@ -528,6 +524,10 @@ namespace MOONCAKE {
             // lv_obj_align(rlottie_anim_dragon, LV_ALIGN_CENTER, 0, 0);
             // lv_obj_t* rlottie_anim = lv_rlottie_create_from_raw(_data.screenMain, 300, 300, RainbowCatRes);
             // lv_obj_align(rlottie_anim, LV_ALIGN_CENTER, 0, 0);
+
+            // lv_obj_t* img = lv_img_create(_data.screenMain);
+            // lv_img_set_src(img, "A:sdcard/winxp.bmp");
+            // lv_obj_align(img, LV_ALIGN_CENTER, 0, 0);
         }
 
 
